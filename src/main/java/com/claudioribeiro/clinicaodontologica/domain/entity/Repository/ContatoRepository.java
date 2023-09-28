@@ -8,5 +8,4 @@ import java.util.UUID;
 
 @Repository
 public interface ContatoRepository extends JpaRepository<Contato, UUID> {
-    // Você pode adicionar métodos de consulta personalizados aqui, se necessário
 }

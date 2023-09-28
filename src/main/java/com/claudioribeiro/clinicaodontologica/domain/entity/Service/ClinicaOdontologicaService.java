@@ -25,14 +25,10 @@ public class ClinicaOdontologicaService implements GenericService<ClinicaOdontol
     @Override
     @Transactional
     public ClinicaOdontologica criar(ClinicaOdontologica clinicaOdontologica) {
-        // Validação dos dados (exemplo simples)
         if (clinicaOdontologica.getNome() == null || clinicaOdontologica.getNome().isEmpty()) {
             throw new IllegalArgumentException("O nome da clínica é obrigatório.");
         }
 
-        // Se necessário, adicione lógica para gerar valores padrão ou calcular campos
-
-        // Chamar o método repository.save para persistir a clínica
         return repository.save(clinicaOdontologica);
     }
 
@@ -50,11 +46,9 @@ public class ClinicaOdontologicaService implements GenericService<ClinicaOdontol
     @Override
     @Transactional
     public ClinicaOdontologica atualizar(ClinicaOdontologica entity) {
-        // Verifique se a clínica odontológica com o ID fornecido existe no banco de dados
         ClinicaOdontologica clinicaExistente = repository.findById(entity.getId()).orElse(null);
 
         if (clinicaExistente != null) {
-            // Atualize os campos da clínica existente com base na entidade recebida
             clinicaExistente.setNome(entity.getNome());
             clinicaExistente.setCnpj(entity.getCnpj());
             clinicaExistente.setRazaoSocial(entity.getRazaoSocial());
@@ -62,10 +56,8 @@ public class ClinicaOdontologicaService implements GenericService<ClinicaOdontol
             clinicaExistente.setEndereco(entity.getEndereco());
             clinicaExistente.setContato(entity.getContato());
 
-            // Salve as alterações no banco de dados
             return repository.save(clinicaExistente);
         } else {
-            // Clínica não encontrada, você pode escolher como lidar com isso, lançar uma exceção, por exemplo
             throw new RuntimeException("Clínica não encontrada com o ID fornecido: " + entity.getId());
         }
     }
@@ -75,7 +67,6 @@ public class ClinicaOdontologicaService implements GenericService<ClinicaOdontol
     public ClinicaOdontologica atualizarClinica(UUID id, ClinicaOdontologica novaClinica) {
         ClinicaOdontologica clinicaExistente = repository.findById(id).orElse(null);
         if (clinicaExistente != null) {
-            // Atualize os campos necessários da clínicaExistente com base na novaClinica
             clinicaExistente.setNome(novaClinica.getNome());
             clinicaExistente.setCnpj(novaClinica.getCnpj());
             clinicaExistente.setRazaoSocial(novaClinica.getRazaoSocial());
@@ -90,7 +81,6 @@ public class ClinicaOdontologicaService implements GenericService<ClinicaOdontol
     @Override
     @Transactional
     public void deletar(UUID id) {
-        // Lógica para excluir uma clínica odontológica pelo ID
         repository.deleteById(id);
     }
 }
